@@ -21,6 +21,7 @@ import time
 import subprocess
 import json
 import re
+import platform
 
 
 class SysInfo:
@@ -63,6 +64,53 @@ class SysInfo:
         host_cmd_out = subprocess.check_output(cmd, shell=True)
         host_name = str(host_cmd_out).lstrip("b'").rstrip("\\n'")
         return {"name": host_name, "ip": str_ip}
+
+    def __parse_platform(self):
+        """
+        Retrieves detailed OS information.
+
+        Returns:
+            dict: A dictionary containing detailed OS information.
+        """
+        platform_info = platform.uname()
+        additional_info = {}
+        match platform_info.system.lower():
+            case "windows":
+                win32_plat = platform.win32_ver()
+                additional_info = {
+                    "version": {
+                        "release": win32_plat[0],
+                        "version": win32_plat[1],
+                        "csd": win32_plat[2],
+                        "ptype": win32_plat[3],
+                    },
+                    "edition": platform.win32_edition(),
+                    "is_iot": platform.win32_is_iot(),
+                }
+            case "linux":
+                linux_info = platform.freedesktop_os_release()
+                if linux_info["ID"] == "ubuntu":
+                    additional_info = {
+                        "id": linux_info["ID"],
+                        "name": linux_info["NAME"],
+                        "pretty_name": linux_info["PRETTY_NAME"],
+                        "version_id": linux_info["VERSION_ID"],
+                        "version": linux_info["VERSION"],
+                        "version_codename": linux_info["VERSION_CODENAME"],
+                        "id_like": linux_info["ID_LIKE"],
+                        "ubuntu_codename": linux_info["UBUNTU_CODENAME"],
+                    }
+                else:
+                    additional_info = linux_info
+            case _:
+                additional_info = {
+                    "message": "No relevant at this moment (yes, that's include mac).",
+                }
+        return {
+            "system": platform_info.system,
+            "machine": platform_info.machine,
+            "additional_info": additional_info,
+        }
 
     def get_free_disk(self):
         """
@@ -282,13 +330,15 @@ class SysInfo:
 
     def get_system_report(self):
         """
-        Generates a comprehensive system report including host, CPU, RAM, disk, and network information.
+        Generates a comprehensive system report including:
+            host, platform, CPU, RAM, disk, and network information.
 
         Returns:
             dict: A dictionary containing detailed system information.
         """
         date_time = self.get_system_date()
         host_data = self.get_host_info()
+        os_data = self.__parse_platform()
         cpu_stats = self.get_cpu_usage()
         disk_data = self.get_free_disk()
         ram_data = self.get_free_ram()
@@ -297,6 +347,7 @@ class SysInfo:
 
         sys_report = {
             "host": host_data["name"],
+            "platform": os_data,
             "ip": host_data["ip"],
             "date": date_time["date"],
             "time": date_time["time"],
