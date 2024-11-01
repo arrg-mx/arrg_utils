@@ -1,3 +1,21 @@
+"""
+sysinfo.py
+
+This module provides the SysInfo class, which includes methods to gather various system information
+such as CPU usage, memory status, disk space, network interface details, and ROS (Robot Operating System)
+environment variables.
+
+Classes:
+    - SysInfo: A class with methods for retrieving and managing system information.
+
+Usage example:
+    from arrg_utils import SysInfo
+
+    sys_info = SysInfo()
+    print(sys_info.get_system_report())
+    print(sys_info.get_system_snapshot())
+"""
+
 import os
 import time
 import subprocess
@@ -6,9 +24,19 @@ import re
 
 
 class SysInfo:
+    """
+    A class to retrieve and manage system information, including host details, disk usage,
+    RAM information, CPU statistics, and ROS (Robot Operating System) environment settings.
+    """
+
     def __init__(self) -> None:
+        """
+        Initializes the SysInfo instance with system command strings and regex patterns.
+        """
         self.__ip_info = "ip -j -4 address"
-        self.__ip_regex_pattern = r"^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\.(?!$)|$)){4}$"  # r"^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$"
+        self.__ip_regex_pattern = (
+            r"^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\.(?!$)|$)){4}$"
+        )
         self.__exclusions = ["lo", "docker0"]
         self.__host_ip = "hostname -I | cut -d ' ' -f1"
         self.__host_name = "hostname -s"
@@ -21,6 +49,12 @@ class SysInfo:
         self.__disk_info = 'df -h | awk \'$NF=="/"{printf "%.1f|%.1f|%.1f", $2,$3,$4}\''
 
     def get_host_info(self):
+        """
+        Retrieves the hostname and IP address of the system.
+
+        Returns:
+            dict: A dictionary containing `name` and `ip` keys with corresponding values.
+        """
         cmd = self.__host_ip
         curr_ip = subprocess.check_output(cmd, shell=True)
         str_ip = str(curr_ip).lstrip("b'")
@@ -31,6 +65,13 @@ class SysInfo:
         return {"name": host_name, "ip": str_ip}
 
     def get_free_disk(self):
+        """
+        Retrieves the total, used, and available disk space on the root directory.
+
+        Returns:
+            dict: A dictionary containing `size`, `used`, and `available`
+            keys with corresponding values in GB.
+        """
         cmd = self.__disk_info
         disk_cmd_output = subprocess.check_output(cmd, shell=True)
         disk_info = str(disk_cmd_output).lstrip("b'")
@@ -43,6 +84,12 @@ class SysInfo:
         }
 
     def get_free_ram(self):
+        """
+        Retrieves the RAM statistics, including total, used, free, and available memory.
+
+        Returns:
+            dict: A dictionary containing `total`, `used`, `free`, and `available` keys.
+        """
         cmd = self.__ram_info
         ram_cmd_output = subprocess.check_output(cmd, shell=True)
         ram_info = str(ram_cmd_output).lstrip("b'")
@@ -56,6 +103,12 @@ class SysInfo:
         }
 
     def get_system_date(self):
+        """
+        Retrieves the current system date and time.
+
+        Returns:
+            dict: A dictionary containing `date` and `time` keys.
+        """
         cmd = self.__sys_date
         date_cmd_out = subprocess.check_output(cmd, shell=True)
         date_time = str(date_cmd_out).lstrip("b'")
@@ -66,9 +119,26 @@ class SysInfo:
     def __compute_cpu_usage(
         self, user_val: int, system_val: int, idle_val: int
     ) -> float:
+        """
+        Computes the CPU usage percentage based on user, system, and idle values.
+
+        Parameters:
+            user_val (int): User mode CPU time.
+            system_val (int): System mode CPU time.
+            idle_val (int): Idle CPU time.
+
+        Returns:
+            float: The CPU usage percentage.
+        """
         return float(user_val + system_val) * 100 / (user_val + system_val + idle_val)
 
     def __full_cpu_stats(self):
+        """
+        Retrieves detailed CPU statistics for each core.
+
+        Returns:
+            list: A list of dictionaries containing detailed CPU statistics for each core.
+        """
         cpu_cmd_exec = subprocess.check_output(self.__cpu_stats_info, shell=True)
         cpu_parsed = str(cpu_cmd_exec).lstrip("b'").rstrip("@'")
         cpu_array = cpu_parsed.split("@")
@@ -102,6 +172,12 @@ class SysInfo:
         return cpu_stats
 
     def __short_cpu_stats(self):
+        """
+        Retrieves a summary of the overall CPU usage.
+
+        Returns:
+            list: A list containing a dictionary with a single CPU usage percentage.
+        """
         cpu_cmd_exec = subprocess.check_output(self.__cpu_usage_short, shell=True)
         cpu_parsed = str(cpu_cmd_exec).lstrip("b'").rstrip("\\n'")
         cpu_stats = []
@@ -115,6 +191,16 @@ class SysInfo:
         return cpu_stats
 
     def get_cpu_usage(self, compute_value_only=False):
+        """
+        Retrieves CPU usage information, either full stats or a summary.
+
+        Parameters:
+            compute_value_only (bool): If True, returns a summary of the overall CPU usage.
+            Defaults to False.
+
+        Returns:
+            list: CPU usage information as a list of dictionaries.
+        """
         cpu_response = (
             self.__full_cpu_stats()
             if not compute_value_only
@@ -124,6 +210,15 @@ class SysInfo:
         return cpu_response
 
     def __validate_ip(self, ipaddress: str) -> bool:
+        """
+        Validates an IP address using a regex pattern.
+
+        Parameters:
+            ipaddress (str): The IP address to validate.
+
+        Returns:
+            bool: True if the IP address is valid, False otherwise.
+        """
         regex_rule = re.compile(self.__ip_regex_pattern)
         if re.search(regex_rule, ipaddress):
             return True
@@ -131,6 +226,16 @@ class SysInfo:
         return False
 
     def parse_network_interfaces(self, filtered=True, target_ip=""):
+        """
+        Parses and retrieves network interfaces with optional filtering by exclusions and target IP.
+
+        Parameters:
+            filtered (bool): If True, excludes interfaces in self.__exclusions. Defaults to True.
+            target_ip (str): A target IP address to filter. Defaults to an empty string.
+
+        Returns:
+            list: A list of dictionaries with network interface information.
+        """
         cmd = self.__ip_info
         ip_data = subprocess.check_output(cmd, shell=True)
         ip_info = json.loads(ip_data)
@@ -154,6 +259,12 @@ class SysInfo:
         return ip_parsed
 
     def get_ros_info(self):
+        """
+        Retrieves the ROS (Robot Operating System) environment details.
+
+        Returns:
+            dict or None: A dictionary containing ROS environment variables or None if ROS is not set.
+        """
         ros_version = os.environ.get("ROS_VERSION")
         if not ros_version:
             return None
@@ -170,6 +281,12 @@ class SysInfo:
         }
 
     def get_system_report(self):
+        """
+        Generates a comprehensive system report including host, CPU, RAM, disk, and network information.
+
+        Returns:
+            dict: A dictionary containing detailed system information.
+        """
         date_time = self.get_system_date()
         host_data = self.get_host_info()
         cpu_stats = self.get_cpu_usage()
@@ -193,6 +310,12 @@ class SysInfo:
         return sys_report
 
     def get_system_snapshot(self):
+        """
+        Generates a snapshot of the system's current CPU, RAM, disk usage, and IP address.
+
+        Returns:
+            dict: A dictionary containing a concise system snapshot.
+        """
         date_time = self.get_system_date()
         host_data = self.get_host_info()
         cpu_stats = self.get_cpu_usage(compute_value_only=True)
@@ -217,6 +340,9 @@ class SysInfo:
 
 
 def main():
+    """
+    Main function to print system report and system snapshot every 2 seconds.
+    """
     sys_info = SysInfo()
     print(sys_info.get_system_report())
     try:
