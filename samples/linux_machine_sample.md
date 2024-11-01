@@ -1,12 +1,12 @@
-# Sample Output
+# Sample Output - VM running Ubuntu
 
-## For Jetson Nano
+## VM with Ubuntu
 
 Typical output for `get_system_report()`:
 
 ```json
 {
-  "host": "robolab-vm",
+  "host": "ubuntu-vm",
   "platform": {
     "system": "Linux",
     "machine": "x86_64",
@@ -21,7 +21,7 @@ Typical output for `get_system_report()`:
       "ubuntu_codename": "jammy"
     }
   },
-  "ip": "192.168.1.102",
+  "ip": "192.168.0.12",
   "date": "01/11/2024",
   "time": "13:54:28",
   "cpu_stats": [
@@ -84,9 +84,9 @@ Typical output for `get_system_report()`:
       "addr_info": [
         {
           "family": "inet",
-          "local": "192.168.1.102",
+          "local": "192.168.0.12",
           "prefixlen": 24,
-          "broadcast": "192.168.1.255",
+          "broadcast": "192.168.0.255",
           "scope": "global",
           "dynamic": true,
           "noprefixroute": true,
@@ -120,7 +120,7 @@ Typical output for `get_system_snapshot()`:
     "available": 8.7,
     "total": 34
   },
-  "ip": "192.168.1.4"
+  "ip": "192.168.0.12"
 }
 ```
 

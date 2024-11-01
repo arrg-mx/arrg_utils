@@ -1,6 +1,8 @@
-# Sample Output
+# Sample Output for embedded device.
 
-## For Jetson Nano
+## Embedded device info
+
+Device: **NVIDIA** _Jetson Nano 4Gb_
 
 Typical output for `get_system_report()`:
 
@@ -82,12 +84,7 @@ Typical output for `get_system_report()`:
     {
       "ifindex": 3,
       "ifname": "eth0",
-      "flags": [
-        "BROADCAST",
-        "MULTICAST",
-        "UP",
-        "LOWER_UP"
-      ],
+      "flags": ["BROADCAST", "MULTICAST", "UP", "LOWER_UP"],
       "mtu": 1500,
       "qdisc": "pfifo_fast",
       "operstate": "UP",
@@ -113,6 +110,8 @@ Typical output for `get_system_report()`:
 }
 ```
 
+---
+
 Typical output for `get_system_snapshot()`:
 
 ```json
@@ -130,5 +129,3 @@ Typical output for `get_system_snapshot()`:
   "ip": "192.168.1.103"
 }
 ```
-
-More examples... on construction.
