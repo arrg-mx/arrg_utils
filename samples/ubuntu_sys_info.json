@@ -1,0 +1,90 @@
+{
+  "host": "robolab-vm",
+  "platform": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "additional_info": {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "pretty_name": "Ubuntu 22.04.5 LTS",
+      "version_id": "22.04",
+      "version": "22.04.5 LTS (Jammy Jellyfish)",
+      "version_codename": "jammy",
+      "id_like": "debian",
+      "ubuntu_codename": "jammy"
+    }
+  },
+  "ip": "192.168.1.102",
+  "date": "01/11/2024",
+  "time": "19:01:21",
+  "cpu_stats": [
+    {
+      "id": 0,
+      "label": "cpu",
+      "type": "total",
+      "core": -1,
+      "user": 47686,
+      "nice:": 143,
+      "system": 8469,
+      "idle": 658558,
+      "usaged": 7.8569999426343164
+    },
+    {
+      "id": 1,
+      "label": "cpu0",
+      "type": "core",
+      "core": 0,
+      "user": 23894,
+      "nice:": 127,
+      "system": 4172,
+      "idle": 329501,
+      "usaged": 7.849158339555943
+    },
+    {
+      "id": 2,
+      "label": "cpu1",
+      "type": "core",
+      "core": 1,
+      "user": 23792,
+      "nice:": 16,
+      "system": 4296,
+      "idle": 329056,
+      "usaged": 7.864614833232534
+    }
+  ],
+  "disk": { "size": 34.0, "used": 24.0, "available": 8.7 },
+  "ram": { "total": 15.0, "used": 995.0, "free": 13.0, "available": 14.0 },
+  "network": [
+    {
+      "ifindex": 2,
+      "ifname": "ens33",
+      "flags": ["BROADCAST", "MULTICAST", "UP", "LOWER_UP"],
+      "mtu": 1500,
+      "qdisc": "fq_codel",
+      "operstate": "UP",
+      "group": "default",
+      "txqlen": 1000,
+      "altnames": ["enp2s1"],
+      "addr_info": [
+        {
+          "family": "inet",
+          "local": "192.168.1.102",
+          "prefixlen": 24,
+          "broadcast": "192.168.1.255",
+          "scope": "global",
+          "dynamic": true,
+          "noprefixroute": true,
+          "label": "ens33",
+          "valid_life_time": 7198,
+          "preferred_life_time": 7198
+        }
+      ]
+    }
+  ],
+  "ros": {
+    "version": 2,
+    "distro": "humble",
+    "domain_id": 10,
+    "localhost_only": false
+  }
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "cpu": 7.85761,
+    "time": "19:01:21",
+    "ram": { "available": 14.0, "total": 15.0 },
+    "disk": { "available": 8.7, "total": 34.0 },
+    "ip": "192.168.1.102"
+  },
+  {
+    "cpu": 7.85428,
+    "time": "19:01:23",
+    "ram": { "available": 14.0, "total": 15.0 },
+    "disk": { "available": 8.7, "total": 34.0 },
+    "ip": "192.168.1.102"
+  },
+  {
+    "cpu": 7.85109,
+    "time": "19:01:25",
+    "ram": { "available": 14.0, "total": 15.0 },
+    "disk": { "available": 8.7, "total": 34.0 },
+    "ip": "192.168.1.102"
+  }
+]
