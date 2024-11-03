@@ -1,0 +1,119 @@
+[
+  {
+    "cpu": 17.787,
+    "time": "18:56:43",
+    "ram": {
+      "available": 5.2,
+      "total": 7.7
+    },
+    "disk": {
+      "available": 12,
+      "total": 28
+    },
+    "ip": "192.168.1.104"
+  },
+  {
+    "cpu": 17.7807,
+    "time": "18:56:45",
+    "ram": {
+      "available": 5.2,
+      "total": 7.7
+    },
+    "disk": {
+      "available": 12,
+      "total": 28
+    },
+    "ip": "192.168.1.104"
+  },
+  {
+    "cpu": 17.775,
+    "time": "18:56:47",
+    "ram": {
+      "available": 5.2,
+      "total": 7.7
+    },
+    "disk": {
+      "available": 12,
+      "total": 28
+    },
+    "ip": "192.168.1.104"
+  },
+  {
+    "cpu": 17.769,
+    "time": "18:56:49",
+    "ram": {
+      "available": 5.2,
+      "total": 7.7
+    },
+    "disk": {
+      "available": 12,
+      "total": 28
+    },
+    "ip": "192.168.1.104"
+  },
+  {
+    "cpu": 17.7633,
+    "time": "18:56:51",
+    "ram": {
+      "available": 5.2,
+      "total": 7.7
+    },
+    "disk": {
+      "available": 12,
+      "total": 28
+    },
+    "ip": "192.168.1.104"
+  },
+  {
+    "cpu": 17.7576,
+    "time": "18:56:53",
+    "ram": {
+      "available": 5.2,
+      "total": 7.7
+    },
+    "disk": {
+      "available": 12,
+      "total": 28
+    },
+    "ip": "192.168.1.104"
+  },
+  {
+    "cpu": 17.7515,
+    "time": "18:56:55",
+    "ram": {
+      "available": 5.2,
+      "total": 7.7
+    },
+    "disk": {
+      "available": 12,
+      "total": 28
+    },
+    "ip": "192.168.1.104"
+  },
+  {
+    "cpu": 17.7448,
+    "time": "18:56:57",
+    "ram": {
+      "available": 5.2,
+      "total": 7.7
+    },
+    "disk": {
+      "available": 12,
+      "total": 28
+    },
+    "ip": "192.168.1.104"
+  },
+  {
+    "cpu": 17.7421,
+    "time": "18:56:59",
+    "ram": {
+      "available": 5.2,
+      "total": 7.7
+    },
+    "disk": {
+      "available": 12,
+      "total": 28
+    },
+    "ip": "192.168.1.104"
+  }
+]
