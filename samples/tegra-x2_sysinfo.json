@@ -1,0 +1,120 @@
+{
+  "host": "tegra-x2",
+  "platform": {
+    "system": "Linux",
+    "machine": "aarch64",
+    "additional_info": {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "pretty_name": "Ubuntu 18.04.6 LTS",
+      "version_id": "18.04",
+      "version": "18.04.6 LTS (Bionic Beaver)",
+      "version_codename": "bionic",
+      "id_like": "debian",
+      "ubuntu_codename": "bionic"
+    }
+  },
+  "ip": "192.168.1.104",
+  "date": "02/11/2024",
+  "time": "18:56:43",
+  "cpu_stats": [
+    {
+      "id": 0,
+      "label": "cpu",
+      "type": "total",
+      "core": -1,
+      "user": 278882,
+      "nice:": 2096,
+      "system": 66888,
+      "idle": 1598193,
+      "usaged": 17.786861169682755
+    },
+    {
+      "id": 1,
+      "label": "cpu0",
+      "type": "core",
+      "core": 0,
+      "user": 69208,
+      "nice:": 283,
+      "system": 18097,
+      "idle": 394227,
+      "usaged": 18.130674596911525
+    },
+    {
+      "id": 2,
+      "label": "cpu3",
+      "type": "core",
+      "core": 1,
+      "user": 74306,
+      "nice:": 438,
+      "system": 16758,
+      "idle": 395158,
+      "usaged": 18.728893386148712
+    },
+    {
+      "id": 3,
+      "label": "cpu4",
+      "type": "core",
+      "core": 2,
+      "user": 66713,
+      "nice:": 737,
+      "system": 15768,
+      "idle": 405042,
+      "usaged": 16.918381286626477
+    },
+    {
+      "id": 4,
+      "label": "cpu5",
+      "type": "core",
+      "core": 3,
+      "user": 68654,
+      "nice:": 636,
+      "system": 16263,
+      "idle": 403039,
+      "usaged": 17.402593676479025
+    }
+  ],
+  "disk": {
+    "size": 28,
+    "used": 15,
+    "available": 12
+  },
+  "ram": {
+    "total": 7.7,
+    "used": 2.3,
+    "free": 1.8,
+    "available": 5.2
+  },
+  "network": [
+    {
+      "ifindex": 3,
+      "ifname": "eth0",
+      "flags": [
+        "BROADCAST",
+        "MULTICAST",
+        "UP",
+        "LOWER_UP"
+      ],
+      "mtu": 1500,
+      "qdisc": "pfifo_fast",
+      "operstate": "UP",
+      "group": "default",
+      "txqlen": 1000,
+      "addr_info": [
+        {
+          "family": "inet",
+          "local": "192.168.1.104",
+          "prefixlen": 24,
+          "broadcast": "192.168.1.255",
+          "scope": "global",
+          "dynamic": true,
+          "noprefixroute": true,
+          "label": "eth0",
+          "valid_life_time": 3958,
+          "preferred_life_time": 3958
+        }
+      ]
+    }
+  ],
+  "ros": "No ROS enviroment"
+}
